@@ -1,0 +1,10 @@
+{
+  "name": "astrojs-payload-monorepo",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+  "forwardPorts": [3000, 5432, 4321],
+
+  "postCreateCommand": "pnpm install"
+}

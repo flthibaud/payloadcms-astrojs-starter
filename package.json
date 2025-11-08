@@ -1,0 +1,22 @@
+{
+  "name": "astrojs-payload-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev:payload": "pnpm --filter ./payload dev",
+    "dev:website": "pnpm --filter ./website dev",
+    "dev": "concurrently -n payload,website -c auto \"pnpm --filter ./payload dev\" \"pnpm --filter ./website dev\"",
+    "install:clean": "rm -rf node_modules pnpm-lock.yaml && pnpm install",
+    "why:payload": "pnpm -w why payload",
+    "dedupe": "pnpm dedupe -r"
+  },
+  "pnpm": {
+    "overrides": {
+      "payload": "latest",
+      "@payloadcms/*": "latest"
+    }
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

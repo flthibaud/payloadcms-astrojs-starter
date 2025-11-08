@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
+    network_mode: service:db
+
+  db:
+    image: postgres:latest  # Utiliser l'image PostgreSQL
+    restart: unless-stopped
+    volumes:
+      - postgres-data-devki-api:/var/lib/postgresql/data  # Définir le volume de données PostgreSQL
+    environment:
+      POSTGRES_DB: devki  # Remplacez par le nom de votre base de données
+      POSTGRES_USER: devki  # Remplacez par votre nom d'utilisateur
+      POSTGRES_PASSWORD: devki  # Remplacez par votre mot de passe
+
+volumes:
+  postgres-data-devki-api:
