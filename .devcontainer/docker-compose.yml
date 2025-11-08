@@ -8,17 +8,23 @@ services:
     volumes:
       - ../..:/workspaces:cached
     command: sleep infinity
-    network_mode: service:db
+    depends_on:
+      - db
+    environment:
+      DATABASE_URI: postgres://postgres:postgres@db:5432/payload
+      PAYLOAD_SECRET: dev-secret
 
   db:
-    image: postgres:latest  # Utiliser l'image PostgreSQL
+    image: postgres:16-alpine
     restart: unless-stopped
     volumes:
-      - postgres-data-devki-api:/var/lib/postgresql/data  # Définir le volume de données PostgreSQL
+      - pgdata:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: devki  # Remplacez par le nom de votre base de données
-      POSTGRES_USER: devki  # Remplacez par votre nom d'utilisateur
-      POSTGRES_PASSWORD: devki  # Remplacez par votre mot de passe
+      POSTGRES_DB: payload
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
 
 volumes:
-  postgres-data-devki-api:
+  pgdata:
