@@ -16,7 +16,8 @@ export const server = {
   }),
   deletePost: defineAction({
     input: z.object({
-      id: z.string(),
+      // UI stores ids as data attributes, coerce them back to numbers for Payload
+      id: z.coerce.number(),
     }),
     accept: 'json',
     handler: async (input) => {

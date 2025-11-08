@@ -13,6 +13,11 @@ import { Posts } from './collections/Posts'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+const PAYLOAD_SECRET = process.env.PAYLOAD_SECRET
+
+if (!PAYLOAD_SECRET) {
+  throw new Error('PAYLOAD_SECRET environment variable is required for Payload to start')
+}
 
 export default buildConfig({
   admin: {
@@ -28,7 +33,7 @@ export default buildConfig({
     Posts
   ],
   editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: PAYLOAD_SECRET,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
