@@ -2,6 +2,7 @@
   "name": "astrojs-payload-monorepo",
   "private": true,
   "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "dev:payload": "pnpm --filter ./payload dev",
     "dev:website": "pnpm --filter ./website dev",
